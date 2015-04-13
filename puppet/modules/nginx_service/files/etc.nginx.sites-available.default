@@ -12,7 +12,7 @@ map $http_upgrade $connection_upgrade {
 server {
   listen 80;
   
-  location /site/pubsub/ {
+  location ~ ^/site/pubsub/ {
     proxy_set_header        Host              $http_host;
     proxy_set_header        X-Forwarded-By    $server_addr:$server_port;
     proxy_set_header        X-Forwarded-For   $proxy_add_x_forwarded_for;

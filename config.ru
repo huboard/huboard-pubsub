@@ -12,7 +12,7 @@ options = {
   ping: 5,
   engine: {
     type: Faye::Redis,
-    uri: (ENV['REDIS_URL'] || 'redis://localhost:6379')
+    uri: ENV['REDIS_URL']
   }
 }
 
