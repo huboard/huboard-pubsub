@@ -13,11 +13,13 @@ module PrivatePub
 end
 PrivatePub.set_config secret_token: ENV['SECRET_KEY']
 
+require './lib/private_faye'
+
 options = {
   mount: ENV['SOCKET_BACKEND'],
   timeout: 25,
   ping: 20,
-  extensions: [PrivatePub::FayeExtension.new],
+  extensions: [PrivateFaye.new],
   engine: {
     type: Faye::Redis,
     uri: ENV['REDIS_URL']
