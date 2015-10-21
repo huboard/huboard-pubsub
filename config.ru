@@ -4,12 +4,20 @@ Bundler.require
 require 'dotenv'
 Dotenv.load
 
-require 'faye'
+module PrivatePub
+  class << self
+    def set_config(config={})
+      config = config
+    end
+  end
+end
+PrivatePub.set_config secret_token: ENV['SECRET_KEY']
 
 options = {
   mount: ENV['SOCKET_BACKEND'],
-  timeout: 10,
-  ping: 5,
+  timeout: 25,
+  ping: 20,
+  extensions: [PrivatePub::FayeExtension.new],
   engine: {
     type: Faye::Redis,
     uri: ENV['REDIS_URL']
