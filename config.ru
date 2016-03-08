@@ -19,7 +19,7 @@ options = {
   mount: ENV['SOCKET_BACKEND'],
   timeout: 25,
   ping: 20,
-  extensions: [PrivateFaye.new],
+ # extensions: [PrivateFaye.new],
   engine: {
     type: Faye::Redis,
     uri: ENV['REDIS_URL']
