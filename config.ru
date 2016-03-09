@@ -32,4 +32,8 @@ options = {
 
 Faye::WebSocket.load_adapter('thin')
 client = Faye::RackAdapter.new(options)
+
+client.on(:disconnect) do |client_id|
+  Faye.logger.info "#{client_id} has been disconnected"
+end
 run client
