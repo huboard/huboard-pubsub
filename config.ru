@@ -13,6 +13,10 @@ module PrivatePub
 end
 PrivatePub.set_config secret_token: ENV['SECRET_KEY']
 
+require 'logger'
+Faye.logger = Logger.new(STDOUT)
+Faye.logger.level = Logger::INFO
+
 require './lib/private_faye'
 
 options = {
@@ -29,7 +33,3 @@ options = {
 Faye::WebSocket.load_adapter('thin')
 client = Faye::RackAdapter.new(options)
 run client
-
-require 'logger'
-Faye.logger = Logger.new(STDOUT)
-Faye.logger.level = Logger::FATAL
