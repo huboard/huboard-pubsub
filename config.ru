@@ -13,6 +13,10 @@ module PrivatePub
 end
 PrivatePub.set_config secret_token: ENV['SECRET_KEY']
 
+require 'logger'
+Faye.logger = Logger.new(STDOUT)
+Faye.logger.level = Logger::INFO
+
 require './lib/private_faye'
 
 options = {
@@ -27,8 +31,9 @@ options = {
 }
 
 Faye::WebSocket.load_adapter('thin')
-run Faye::RackAdapter.new(options)
+client = Faye::RackAdapter.new(options)
 
-require 'logger'
-Faye.logger = Logger.new(STDOUT)
-Faye.logger.level = Logger::INFO
+client.on(:disconnect) do |client_id|
+  Faye.logger.info "#{client_id} has been disconnected"
+end
+run client
