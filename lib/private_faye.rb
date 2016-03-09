@@ -9,6 +9,9 @@ class PrivateFaye
   end
 
   def authenticate_subscribe(message)
+    Faye.logger.info("Setting up authenticated subscription for:")
+    Faye.logger.info(message)
+
     if message["ext"].nil?
       message["error"] = "Extension data is missing"
       return message
