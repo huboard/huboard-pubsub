@@ -28,17 +28,8 @@ options = {
 
 Faye::WebSocket.load_adapter('thin')
 client = Faye::RackAdapter.new(options)
-
-client.on(:unsubscribe) do |client_id|
-  STDOUT.puts "#{client_id} unsubscribed"
-end
-
-client.on(:disconnect) do |client_id|
-  STDOUT.puts "#{client_id} disconnected"
-end
-
 run client
 
 require 'logger'
 Faye.logger = Logger.new(STDOUT)
-Faye.logger.level = Logger::INFO
+Faye.logger.level = Logger::FATAL
