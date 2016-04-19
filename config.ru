@@ -17,8 +17,8 @@ require './lib/private_faye'
 
 options = {
   mount: ENV['SOCKET_BACKEND'],
-  timeout: 25,
-  ping: 10,
+  timeout: 120,
+  ping: 60,
  # extensions: [PrivateFaye.new],
   engine: {
     type: Faye::Redis,
@@ -31,4 +31,4 @@ run Faye::RackAdapter.new(options)
 
 require 'logger'
 Faye.logger = Logger.new(STDOUT)
-Faye.logger.level = Logger::DEBUG
+Faye.logger.level = Logger::INFO
