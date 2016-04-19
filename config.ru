@@ -18,7 +18,7 @@ require './lib/private_faye'
 options = {
   mount: ENV['SOCKET_BACKEND'],
   timeout: 25,
-  ping: 20,
+  ping: 10,
  # extensions: [PrivateFaye.new],
   engine: {
     type: Faye::Redis,
@@ -26,9 +26,9 @@ options = {
   }
 }
 
-Faye::WebSocket.load_adapter('thin')
+#Faye::WebSocket.load_adapter('thin')
 run Faye::RackAdapter.new(options)
 
 require 'logger'
 Faye.logger = Logger.new(STDOUT)
-Faye.logger.level = Logger::INFO
+Faye.logger.level = Logger::DEBUG
