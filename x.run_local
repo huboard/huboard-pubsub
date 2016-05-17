@@ -1,1 +1,1 @@
-bundle exec rackup config.ru -s thin -E production --host /tmp/pubsub.sock
+bundle exec rackup config.ru -s Puma -E production --host /tmp/pubsub.sock
