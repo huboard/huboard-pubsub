@@ -26,7 +26,6 @@ options = {
   }
 }
 
-Faye::WebSocket.load_adapter('thin')
 run Faye::RackAdapter.new(options)
 
 require 'logger'
